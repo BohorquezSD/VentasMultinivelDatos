@@ -21,8 +21,11 @@ INSERT into REGION values('1','Andina','1');
 INSERT into REGION values('2','Pacifica','1');
 
 INSERT into PRODUCTO_REGION values('1','1','30');
+INSERT into PRODUCTO_REGION values('3','1','20');
 INSERT into PRODUCTO_REGION values('2','1','10');
 INSERT into PRODUCTO_REGION values('3','2','5');
+INSERT into PRODUCTO_REGION values('2','1','30');
+
 
 INSERT into CLASIFICACION values('1','BEGINNER','0.01');
 INSERT into CLASIFICACION values('2','JUNIOR','0.03');
