@@ -42,9 +42,9 @@ GRANT DBA TO MULTINIVEL;
 
 CONN MULTINIVEL/MULTINIVEL
 
-START'/home/usuario/Documentos/bases2/proyectoFinal/VentasMultinivelDatos/VentasMultinivelCreacion.sql'
+START'/home/trabajo/Documentos/bases2/proyectoFinal/VentasMultinivelDatos/VentasMultinivelCreacion.sql'
 
-start '/home/usuario/Documentos/bases2/proyectoFinal/VentasMultinivelDatos/VentasMultinivelLLenado.sql' 
+start '/home/trabajo/Documentos/bases2/proyectoFinal/VentasMultinivelDatos/VentasMultinivelLLenado.sql' 
 
 -----------------------------VISTAS---------------------------------
 
