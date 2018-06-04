@@ -22,11 +22,11 @@ end;
 
 CREATE TABLE  "SIMULADOR_BANCO"
 (
-	"K_CODTARJETA" NUMBER(12) NOT NULL,    -- C骴igo de la cuenta bancaria, su identificador
+	"K_CODTARJETA" NUMBER(12) NOT NULL,    -- C贸digo de la cuenta bancaria, su identificador
 	"N_BANCO" VARCHAR2(25) NOT NULL,    -- Nombre del banco a la que pertecene la cuenta bancaria
-	"N_PROPIETARIO" NUMBER(11) NOT NULL,    -- C骴igo del propietario de la cuenta bancaria, siendo este su n鷐ero de c閐ula
+	"N_PROPIETARIO" NUMBER(11) NOT NULL,    -- C贸digo del propietario de la cuenta bancaria, siendo este su n煤mero de c茅dula
 	"V_SALDO" NUMBER(11,2) NOT NULL,    -- Cantidad de dinero disponible que tiene el cliente en su cuenta bancaria para gastar.
-	"I_CODIGO" NUMBER(3) NOT NULL,    -- C骴igo de verificaci髇 de la tarjeta
+	"I_CODIGO" NUMBER(3) NOT NULL,    -- C贸digo de verificaci贸n de la tarjeta
 	"I_CLAVE" NUMBER(4) NOT NULL,    -- Clave de la cuenta bancaria
 	"I_ESTADO" VARCHAR2(10) NOT NULL,    -- Estado de la cuenta bancaria
 	"F_FECHAVEN" DATE NOT NULL    -- Fecha en la que vence la cuenta bancaria
@@ -35,22 +35,22 @@ CREATE TABLE  "SIMULADOR_BANCO"
 
 /* Create Comments, Sequences and Triggers for Autonumber Columns */
 
-COMMENT ON TABLE  "SIMULADOR_BANCO" IS 'Tabla que tiene la funcionalidad de simular la informanci髇 bancaria de los clientes inscritos a la empresa.'
+COMMENT ON TABLE  "SIMULADOR_BANCO" IS 'Tabla que tiene la funcionalidad de simular la informanci贸n bancaria de los clientes inscritos a la empresa.'
 ;
 
-COMMENT ON COLUMN  "SIMULADOR_BANCO"."K_CODTARJETA" IS 'C骴igo de la cuenta bancaria, su identificador'
+COMMENT ON COLUMN  "SIMULADOR_BANCO"."K_CODTARJETA" IS 'C贸digo de la cuenta bancaria, su identificador'
 ;
 
 COMMENT ON COLUMN  "SIMULADOR_BANCO"."N_BANCO" IS 'Nombre del banco a la que pertecene la cuenta bancaria'
 ;
 
-COMMENT ON COLUMN  "SIMULADOR_BANCO"."N_PROPIETARIO" IS 'C骴igo del propietario de la cuenta bancaria, siendo este su n鷐ero de c閐ula'
+COMMENT ON COLUMN  "SIMULADOR_BANCO"."N_PROPIETARIO" IS 'C贸digo del propietario de la cuenta bancaria, siendo este su n煤mero de c茅dula'
 ;
 
 COMMENT ON COLUMN  "SIMULADOR_BANCO"."V_SALDO" IS 'Cantidad de dinero disponible que tiene el cliente en su cuenta bancaria para gastar.'
 ;
 
-COMMENT ON COLUMN  "SIMULADOR_BANCO"."I_CODIGO" IS 'C骴igo de verificaci髇 de la tarjeta'
+COMMENT ON COLUMN  "SIMULADOR_BANCO"."I_CODIGO" IS 'C贸digo de verificaci贸n de la tarjeta'
 ;
 
 COMMENT ON COLUMN  "SIMULADOR_BANCO"."I_CLAVE" IS 'Clave de la cuenta bancaria'
@@ -91,7 +91,7 @@ insert into banco values('123456789010','BANCOLOMBIA','400000','10200300,50','12
 
 CONN SYSTEM/1234
 
-GRANT SELECT BANCO TO JUAN;
+GRANT SELECT ON BANCO TO JUAN;
 
 CONN JUAN/juan
 
