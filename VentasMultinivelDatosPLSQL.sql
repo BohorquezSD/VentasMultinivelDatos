@@ -13,3 +13,11 @@ BEGIN
     UPDATE PRODUCTO_REGION SET Q_STOCK = Q_STOCK - :new.Q_CANTIDAD WHERE PRODUCTO_REGION.K_PRODUCTO = :new.K_PRODUCTO;
 END;
 /
+
+--Realizar la calificación del representante de una venta
+CREATE OR REPLACE PROCEDURE CALIFICAR_REPRESENTANTE(codRepresent IN VENTA.K_ID_REP_CLIENTE%TYPE,
+                                                    calificacion IN VENTA.V_CALIFICACION%TYPE,venta IN VENTA.K_CODVENTA%TYPE) IS 
+BEGIN
+    update venta v set v.V_CALIFICACION = calificacion where v.K_ID_REP_CLIENTE = codRepresent and v.K_CODVENTA = venta;
+END CALIFICAR_REPRESENTANTE;
+/
