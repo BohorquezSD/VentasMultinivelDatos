@@ -13,7 +13,9 @@ BEGIN
     select I.V_IVA INTO V_IVA from IVA I,VENTA V where V.K_IVA =I.K_IMPUESTO;
     V_TOTAL := V_ANTERIOR + (V_TOTAL * V_IVA);
     UPDATE VENTA SET V_PRECIOFINAL = V_TOTAL WHERE VENTA.K_CODVENTA = :new.K_VENTA;
-    UPDATE PRODUCTO_REGION SET Q_STOCK = Q_STOCK - :new.Q_CANTIDAD WHERE PRODUCTO_REGION.K_PRODUCTO = :new.K_PRODUCTO ;
+    --La siguiente linea es para actualizar el stock de la region, el error que esta es que le resta
+    --a cualquiera de las regiones
+    UPDATE PRODUCTO_REGION SET Q_STOCK = Q_STOCK - :new.Q_CANTIDAD WHERE PRODUCTO_REGION.K_PRODUCTO = :new.K_PRODUCTO;
 END;
 /
 
