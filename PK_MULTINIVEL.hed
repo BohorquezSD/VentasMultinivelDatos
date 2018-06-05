@@ -1,0 +1,22 @@
+create or replace PACKAGE PK_MULTINIVEL IS
+/*-----------------------------------------------------------------------------------------------------------
+  Incluye la definición de los procedimiento y funciones asociados a la gestión de ventas multinivel de la empresa NatAmE
+*/
+   --Declaración del tipo registro con los datos básicos para calificar los representantes de ventas
+    PROCEDURE CALIFICAR_REPRESENTANTE(
+                        codRepresent IN VENTA.K_ID_REP_CLIENTE%TYPE,
+                        calificacion IN VENTA.V_CALIFICACION%TYPE,
+                        venta IN VENTA.K_CODVENTA%TYPE);
+
+/*------------------------------------------------------------------------------*/    
+    
+    --Datos necesarios para lograr sacar el promedio de calificacion de los representantes periodicamente
+    PROCEDURE PROMEDIO_PERIODICO IS
+        CURSOR pro IS SELECT TO_CHAR(V.F_FECHA,'YY/MM') AS fecha,RV.K_CODREPVENTAS as representante, AVG(V.V_CALIFICACION)  AS promedi FROM VENTA V;
+
+/*------------------------------------------------------------------------------*/    
+
+    --Declaración del tipo registro con los datos básicos para evaluar la comision periodicamente de los representantes de ventas
+    PROCEDURE PR_COMISION_PERIODICA CURSOR comi IS SELECT TO_CHAR(V.F_FECHA,'YY/MM') AS fecha,RV.K_CODREPVENTAS as vendedor, SUM(V.V_PRECIOFINAL)*C.V_PORCOMISION as comision FROM VENTA V;
+ 
+END PK_ESTUDIANTES;

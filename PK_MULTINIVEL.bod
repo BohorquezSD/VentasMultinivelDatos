@@ -1,0 +1,80 @@
+create or replace PACKAGE BODY PK_MULTINIVEL IS
+/*-----------------------------------------------------------------------------------------------------------
+  Incluye la implementación de los procedimiento y funciones asociados a la a la gestión de ventas multinivel de la empresa NatAmE
+*/
+
+    PROCEDURE CALIFICAR_REPRESENTANTE(codRepresent IN VENTA.K_ID_REP_CLIENTE%TYPE,
+                                                    calificacion IN VENTA.V_CALIFICACION%TYPE,venta IN VENTA.K_CODVENTA%TYPE) IS 
+    BEGIN
+        update venta v set v.V_CALIFICACION = calificacion where v.K_ID_REP_CLIENTE = codRepresent and v.K_CODVENTA = venta;
+    END CALIFICAR_REPRESENTANTE;
+    /
+
+    --Tabula el promedio de calificacion de los representantes que han hecho alguna venta
+    CREATE OR REPLACE PROCEDURE PROMEDIO_PERIODICO IS
+      CURSOR pro IS SELECT TO_CHAR(V.F_FECHA,'YY/MM') AS fecha,RV.K_CODREPVENTAS as representante, AVG(V.V_CALIFICACION)  AS promedi 
+      FROM VENTA V 
+      INNER JOIN REPRESENTANTE_CLIENTE RC ON V.K_ID_REP_CLIENTE = RC.K_ID_REP_CLIENTE 
+      INNER JOIN REP_VENTAS RV ON RC.K_CODREPVENTAS = RV.K_CODREPVENTAS 
+      GROUP BY TO_CHAR(V.F_FECHA,'YY/MM'),RV.K_CODREPVENTAS;
+      promedio pro%ROWTYPE;
+    BEGIN
+      open pro;
+        FETCH pro into PROMEDIO;
+        WHILE pro%FOUND LOOP
+          FETCH pro into PROMEDIO;
+          DBMS_OUTPUT.put_line (PROMEDIO.fecha ||' '||PROMEDIO.representante ||' '||PROMEDIO.promedi);
+        END LOOP;
+      CLOSE pro;
+    END PROMEDIO_PERIODICO;
+    /
+
+/*---------------------------------------------------------------------------*/
+
+    PROCEDURE PROMEDIO_PERIODICO IS
+      CURSOR pro IS SELECT TO_CHAR(V.F_FECHA,'YY/MM') AS fecha,RV.K_CODREPVENTAS as representante, AVG(V.V_CALIFICACION)  AS promedi 
+      FROM VENTA V 
+      INNER JOIN REPRESENTANTE_CLIENTE RC ON V.K_ID_REP_CLIENTE = RC.K_ID_REP_CLIENTE 
+      INNER JOIN REP_VENTAS RV ON RC.K_CODREPVENTAS = RV.K_CODREPVENTAS 
+      GROUP BY TO_CHAR(V.F_FECHA,'YY/MM'),RV.K_CODREPVENTAS;
+      promedio pro%ROWTYPE;
+    BEGIN
+      open pro;
+        FETCH pro into PROMEDIO;
+        WHILE pro%FOUND LOOP
+          FETCH pro into PROMEDIO;
+          DBMS_OUTPUT.put_line (PROMEDIO.fecha ||' '||PROMEDIO.representante ||' '||PROMEDIO.promedi);
+        END LOOP;
+      CLOSE pro;
+    END PROMEDIO_PERIODICO;
+    /
+
+/*---------------------------------------------------------------------------*/
+
+    PROCEDURE PR_COMISION_PERIODICA IS
+      CURSOR comi IS SELECT TO_CHAR(V.F_FECHA,'YY/MM') AS fecha,RV.K_CODREPVENTAS as vendedor, SUM(V.V_PRECIOFINAL)*C.V_PORCOMISION as comision
+      FROM VENTA V
+      INNER JOIN REPRESENTANTE_CLIENTE RC ON RC.K_ID_REP_CLIENTE = V.K_ID_REP_CLIENTE
+      INNER JOIN REP_VENTAS RV ON RV.K_CODREPVENTAS = RC.K_CODREPVENTAS
+      INNER JOIN CLASIFICACION C ON RV.K_CLASIFICACION = C.K_CODCLASI
+      GROUP BY TO_CHAR(V.F_FECHA,'YY/MM'),RV.K_CODREPVENTAS,C.V_PORCOMISION;
+      comisi comi%ROWTYPE;
+    BEGIN
+      OPEN comi;
+        FETCH comi INTO comisi;
+        WHILE comi%FOUND LOOP
+          FETCH comi INTO comisi;
+          DBMS_OUTPUT.put_line (comisi.fecha||' '||comisi.vendedor||' '||comisi.comision);
+        END LOOP;
+      CLOSE comi;
+      
+    END PR_COMISION_PERIODICA;
+    /
+
+
+/*---------------------------------------------------------------------------*/
+
+
+
+
+END PK_MULTINIVEL;
