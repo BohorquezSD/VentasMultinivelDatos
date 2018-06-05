@@ -19,6 +19,10 @@ INSERT into PAIS values('1','Colombia');
 
 INSERT into REGION values('1','Andina','1');
 INSERT into REGION values('2','Pacifica','1');
+INSERT into REGION values('3','Caribe','1');
+INSERT into REGION values('4','Amazonia','1');
+INSERT into REGION values('5','Orinoquia','1');
+
 
 INSERT into PRODUCTO_REGION values('1','1','30');
 INSERT into PRODUCTO_REGION values('3','1','20');
@@ -37,5 +41,27 @@ INSERT into REP_VENTAS values('20000000','Duvan','Prieto','dup@correo','M',DATE'
 INSERT into REP_VENTAS values('30000000','Alexis','Sanchez','alsb@correo','M',DATE'1990-06-15',DATE'2018-04-01', '3333333', 'calle1235', '2','10000000' ,'3');
 
 INSERT into CLIENTE values ('400000', 'Juan','Rodriguez','calle 40 cr 7','villavicencio','4444444', 'jam@correo');
+INSERT into CLIENTE values ('500000', 'Camila','Perez','calle 40 cr 7','cali','555555', 'cam@correo');
 
 INSERT into REPRESENTANTE_CLIENTE values ('10000000', '400000', DATE'2018-02-20', DATE '2018-04-20', '1');
+INSERT into REPRESENTANTE_CLIENTE values ('20000000', '500000', DATE'2018-03-20', DATE '2018-04-01', '2');
+
+INSERT into REGION_REPRESENTANTE values('1','10000000','1',DATE'2018-03-01',NULL);
+INSERT into REGION_REPRESENTANTE values('2','20000000','1',DATE'2018-02-20',NULL);
+
+INSERT into IVA values('1',DATE'2018-02-20',0.1);
+
+INSERT into PSE values(123451);
+
+INSERT into TARJETA values(10203040,123);
+
+INSERT into PAGO values('1',DATE'2018-03-20',123451,NULL);
+INSERT into PAGO values('2',DATE'2018-03-21',NULL,10203040);
+
+INSERT into VENTA values(1,DATE'2018-03-20',0,'TERMINADO',1,0,0,1,1);
+INSERT into VENTA values(2,DATE'2018-03-21',0,'TERMINADO',2,0,0,2,1);
+
+INSERT into PRODUCTO_VENTA values('2',1,1);
+INSERT into PRODUCTO_VENTA values('3',1,2);
+INSERT into PRODUCTO_VENTA values('1',2,4);
+
